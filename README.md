@@ -1,5 +1,7 @@
 # gosimplehttpserver
 Golang http server with logging and gracefull shutdown
+- 'root' folder with mux and gracefull shutdown
+- 'basic' subfolder without mux and gracefull shutdown
 
 # build
 * go get -d -v
