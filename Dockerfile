@@ -1,6 +1,8 @@
 FROM busybox:1.31
 
-COPY ./gosimplehttpserver /home/
-EXPOSE 8000
+ARG BIN_FILE
+ADD ${BIN_FILE} /home/gosimplehttpserver
 
-CMD ["/home/gosimplehttpserver"]
+EXPOSE 7000
+
+ENTRYPOINT ["/home/gosimplehttpserver"]
