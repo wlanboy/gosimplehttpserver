@@ -33,11 +33,11 @@ jobs:
     - uses: actions/checkout@master
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@master
+      env:
+        BIN_FILE: ./gosimplehttpserver
       with:
         name: wlanboy/gosimplehttpserver
         dockerfile: Dockerfile
-        workdir: /home/runner/work/gosimplehttpserver
-        context: /home/runner/work/gosimplehttpserver
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         tags: "latest"
