@@ -17,6 +17,12 @@ Golang http server with logging and gracefull shutdown
 * go get -u github.com/go-delve/delve/cmd/dlv
 * dlv debug ./ip
 
+# docker build
+docker build -t gosimplehttpserver:latest . --build-arg BIN_FILE=./gosimplehttpserver
+
+# docker run
+docker run --name kanban -p 7000:7000 wlanboy/gosimplehttpserver
+
 # calls
 * curl http://127.0.0.1:7000/ip
 * curl http://127.0.0.1:7000/host
