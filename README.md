@@ -1,3 +1,5 @@
+![Go](https://github.com/wlanboy/gosimplehttpserver/workflows/Go/badge.svg?branch=master)
+
 # gosimplehttpserver
 Golang http server with logging and gracefull shutdown
 - 'root' folder with mux and gracefull shutdown
