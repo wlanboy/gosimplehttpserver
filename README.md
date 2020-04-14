@@ -17,6 +17,9 @@ Golang http server with logging and gracefull shutdown
 * go get -u github.com/go-delve/delve/cmd/dlv
 * dlv debug ./ip
 
+# go lang build for docker
+CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -v .
+
 # docker build
 docker build -t gosimplehttpserver:latest . --build-arg BIN_FILE=./gosimplehttpserver
 
