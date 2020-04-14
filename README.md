@@ -24,7 +24,7 @@ CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -v .
 docker build -t gosimplehttpserver:latest . --build-arg BIN_FILE=./gosimplehttpserver
 
 # docker run
-docker run --name kanban -p 7000:7000 wlanboy/gosimplehttpserver
+docker run --name gosimplehttpserver -p 7000:7000 wlanboy/gosimplehttpserver
 
 # calls
 * curl http://127.0.0.1:7000/ip
