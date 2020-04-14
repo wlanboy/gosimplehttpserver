@@ -1,4 +1,4 @@
-![Go](https://github.com/wlanboy/gosimplehttpserver/workflows/Go/badge.svg?branch=master)
+![Go](https://github.com/wlanboy/gosimplehttpserver/workflows/Go/badge.svg?branch=master) ![Docker build and publish image](https://github.com/wlanboy/gosimplehttpserver/workflows/Docker%20build%20and%20publish%20image/badge.svg)
 
 # gosimplehttpserver
 Golang http server with logging and gracefull shutdown
