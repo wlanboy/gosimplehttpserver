@@ -23,6 +23,13 @@ CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -v .
 # docker build
 docker build -t gosimplehttpserver:latest . --build-arg BIN_FILE=./gosimplehttpserver
 
+## Docker publish to github registry
+- docker tag gosimplehttpserver:latest docker.pkg.github.com/wlanboy/gosimplehttpserver/gosimplehttpserver:latest
+- docker push docker.pkg.github.com/wlanboy/gosimplehttpserver/gosimplehttpserver:latest
+
+## Docker Registry repro
+- https://github.com/wlanboy/gosimplehttpserver/packages/278511
+
 # docker run
 docker run --name gosimplehttpserver -p 7000:7000 wlanboy/gosimplehttpserver
 
