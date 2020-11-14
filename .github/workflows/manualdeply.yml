@@ -20,4 +20,4 @@ jobs:
           port: ${{ secrets.SSHPORT }}
           script: |
             docker pull docker.pkg.github.com/wlanboy/gosimplehttpserver/gosimplehttpserver:latest
-            docker run --name gosimplehttpserver -p 7000:7000 wlanboy/gosimplehttpserver
+            docker run --name gosimplehttpserver -p 7000:7000 docker.pkg.github.com/wlanboy/gosimplehttpserver/gosimplehttpserver:latest
