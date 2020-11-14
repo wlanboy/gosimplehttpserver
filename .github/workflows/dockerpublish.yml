@@ -15,8 +15,6 @@ jobs:
 
     - name: Publish to Registry
       uses: elgohr/Publish-Docker-Github-Action@master
-      env:
-        BIN_FILE: ./gosimplehttpserver
       with:
         name: wlanboy/gosimplehttpserver
         dockerfile: Dockerfile
