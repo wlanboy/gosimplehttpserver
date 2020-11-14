@@ -28,6 +28,8 @@ jobs:
       
     - name: Build and publish Docker Image to GitHub Packages Registry
       uses: VaultVulp/gp-docker-action@1.1.7
+      env:
+         BIN_FILE: ./gosimplehttpserver
       with:
         github-token: ${{ github.token }}
         image-name: gosimplehttpserver
