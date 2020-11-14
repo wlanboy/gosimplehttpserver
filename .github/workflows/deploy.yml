@@ -18,4 +18,4 @@ jobs:
             docker pull docker.pkg.github.com/wlanboy/gosimplehttpserver/gosimplehttpserver:latest
             docker stop gosimplehttpserver
             docker rm gosimplehttpserver
-            docker run --name gosimplehttpserver -p 7000:7000 docker.pkg.github.com/wlanboy/gosimplehttpserver/gosimplehttpserver:latest
+            docker run --name gosimplehttpserver -d -p 7000:7000 docker.pkg.github.com/wlanboy/gosimplehttpserver/gosimplehttpserver:latest
