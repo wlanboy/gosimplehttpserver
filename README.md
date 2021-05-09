@@ -27,6 +27,9 @@ docker build -t gosimplehttpserver:latest . --build-arg BIN_FILE=./gosimplehttps
 - docker tag gosimplehttpserver:latest docker.pkg.github.com/wlanboy/gosimplehttpserver/gosimplehttpserver:latest
 - docker push docker.pkg.github.com/wlanboy/gosimplehttpserver/gosimplehttpserver:latest
 
+## Docker hub
+- https://hub.docker.com/repository/docker/wlanboy/gosimplehttpserver
+
 ## Docker Registry repro
 - https://github.com/wlanboy/gosimplehttpserver/packages/278511
 
