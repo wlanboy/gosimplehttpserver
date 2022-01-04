@@ -41,3 +41,6 @@ docker run --name gosimplehttpserver -p 7000:7000 wlanboy/gosimplehttpserver
 * curl http://127.0.0.1:7000/host
 * curl http://127.0.0.1:7000/agent
 * curl -H "hello: world" http://127.0.0.1:7000/header
+* curl http://127.0.0.1:7000/dump to get the dump of the whole http request object
+* http://127.0.0.1:7000/ to get pastebin homepage
+* curl -X POST -F 'code=myprettylittleinformation' http://127.0.0.1:7000/paste to create a paste
