@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/http/httputil"
 	"strings"
 )
 
@@ -47,12 +48,20 @@ func headershandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func dumphandler(w http.ResponseWriter, req *http.Request) {
+	requestDump, err := httputil.DumpRequest(req, true)
+	if err == nil {
+		fmt.Fprint(w, string(requestDump))
+	}
+}
+
 func main() {
 	http.HandleFunc("/", iphandler)
 	http.HandleFunc("/ip", iphandler)
 	http.HandleFunc("/host", hosthandler)
 	http.HandleFunc("/agent", agenthandler)
 	http.HandleFunc("/header", headershandler)
+	http.HandleFunc("/dump", dumphandler)
 
 	log.Println("start web server")
 	log.Fatal(http.ListenAndServe(":7000", nil))
