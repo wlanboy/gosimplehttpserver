@@ -2,9 +2,12 @@ package main
 
 import (
 	"context"
+	"encoding/base64"
 	"fmt"
 	"log"
+	"math/rand"
 	"net/http"
+	"net/http/httputil"
 	"os"
 	"os/signal"
 	"strings"
@@ -67,16 +70,73 @@ func headershandler() http.Handler {
 	})
 }
 
+func dumphandler() http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		requestDump, err := httputil.DumpRequest(r, true)
+		if err == nil {
+			fmt.Fprint(w, string(requestDump))
+		}
+	})
+}
+
+const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+const (
+	letterIdxBits = 6                    // 6 bits to represent a letter index
+	letterIdxMask = 1<<letterIdxBits - 1 // All 1-bits, as many as letterIdxBits
+	letterIdxMax  = 63 / letterIdxBits   // # of letter indices fitting in 63 bits
+)
+
+func randomletterString(n int) string {
+	var src = rand.NewSource(time.Now().UnixNano())
+	b := make([]byte, n)
+	// A src.Int63() generates 63 random bits, enough for letterIdxMax characters!
+	for i, cache, remain := n-1, src.Int63(), letterIdxMax; i >= 0; {
+		if remain == 0 {
+			cache, remain = src.Int63(), letterIdxMax
+		}
+		if idx := int(cache & letterIdxMask); idx < len(letterBytes) {
+			b[i] = letterBytes[idx]
+			i--
+		}
+		cache >>= letterIdxBits
+		remain--
+	}
+
+	return string(b)
+}
+
+func pastehandler() http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		r.ParseForm()
+		code := r.FormValue("code")
+		hash := base64.StdEncoding.EncodeToString([]byte(randomletterString(32)))
+
+		file, err := os.Create("./static/" + hash)
+		if err == nil {
+			file.WriteString(code)
+		}
+		file.Close()
+		if err == nil {
+			fmt.Fprintf(w, "<a href='/%v'> your pastebin link </a>\n", hash)
+		}
+	})
+}
+
 func main() {
 
 	logger := log.New(os.Stdout, "http: ", log.LstdFlags)
 
 	router := http.NewServeMux()
-	router.Handle("/", accesslog(iphandler(), logger))
+	fileServer := http.FileServer(http.Dir("./static"))
+	router.Handle("/", accesslog(fileServer, logger))
+
 	router.Handle("/ip", accesslog(iphandler(), logger))
 	router.Handle("/agent", accesslog(agenthandler(), logger))
 	router.Handle("/host", accesslog(hosthandler(), logger))
 	router.Handle("/header", accesslog(headershandler(), logger))
+	router.Handle("/dump", accesslog(dumphandler(), logger))
+
+	router.Handle("/paste", accesslog(pastehandler(), logger))
 
 	server := &http.Server{
 		Addr:         ":7000",
