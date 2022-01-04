@@ -17,8 +17,13 @@ Golang http server with logging and gracefull shutdown
 * go get -u github.com/go-delve/delve/cmd/dlv
 * dlv debug ./ip
 
+# go lang build for different boards
+- GOOS=linux GOARCH=386 go build (386 needed for busybox)
+- GOOS=linux GOARCH=arm GOARM=6 go build (Raspberry Pi build)
+- GOOS=linux GOARCH=arm64 go build (Odroid C2 build)
+
 # go lang build for docker
-CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -v .
+- CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -v .
 
 # docker build
 docker build -t gosimplehttpserver:latest . --build-arg BIN_FILE=./gosimplehttpserver
